@@ -1,6 +1,6 @@
 # Console Output Experiments
 
-This project started as a simple experiment to determine what graphical output could be accomplished using just unicode characters on a standard Windows terminal. The idea was to determine if a console could be used to create something that could form the basis of an extremely lightweight rendering back-end for visualising output.
+This project started as a simple experiment to determine what graphical output could be accomplished using just unicode characters (e.g.  the ANSI block characters that were included in Unicode https://en.wikipedia.org/wiki/Block_Elements) on a standard Windows terminal. The idea was to determine if a console could be used to create something that could form the basis of an extremely lightweight rendering back-end for visualising output.
 
 Initially the output speed to the console of a small viewport was painfully slow. The code was written with platform portability in mind and as such I used only methods from the C++ standard to write to the console.
 

@@ -20,6 +20,7 @@ The first attempt was to use streams via std::cout as shown below:
             std::wcout << '\n';
         }
     }
+![cout](/imgs/cout.PNG "cout")
 
 This resulted in uninspiring **~6 FPS** with visible horizontal refreshing. Not idea for any use case that needs to update the screen quickly.
 
@@ -41,6 +42,7 @@ My next attempt attempted to avoid the buffering of streams and writing characte
             wprintf(lineBuffer.c_str());
         }
     }
+![printf](/imgs/printf.PNG "cout")
 
 The result was better with between **9 and 10 FPS** achieved. Despite couple to doubling the draw speed it still didn't feel particularly useful. I then discarded standard library functions altogether looking to see if I could find a Windows API call that would allow me to directly access the underlying text buffer of the console window. My aim was to create a double buffering mechanism so that even with a low refresh rate, screen updates would seem atomic to someone looking at the console. After a bit of digging I found the WriteConsoleOutput Windows API function.
 
@@ -70,6 +72,7 @@ The result was better with between **9 and 10 FPS** achieved. Despite couple to 
         // Set console position to the line afte we've written to follow other behaviour
         SetConsolePos(0, static_cast<uint8_t>(blockHeight + 1));
     }
+![direct](/imgs/direct.PNG "cout")
 
 Despite requiring a little more wrangling than the previous approaches the result was extraordinary. On an i7-3770k this code resulted in **8000 FPS**! It seems extraordinary that the previous approaches were so slow by comparison.
 

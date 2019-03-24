@@ -106,8 +106,6 @@ int main()
 {
     _setmode(_fileno(stdout), _O_U16TEXT);
 
-    std::vector<wchar_t> distance = { 0x2591, 0x2592, 0x2593, 0x2588, 0x25E8 };
-
     using ClockType = std::chrono::high_resolution_clock;
     while(1)
     {

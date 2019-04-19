@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "ConsoleOutput.h"
 
+namespace SCE
+{
+
 ConsoleOutput::ConsoleOutput(ConsoleBoundType boundX, ConsoleBoundType boundY)
     : m_boundX(boundX)
     , m_boundY(boundY)
@@ -17,7 +20,7 @@ ConsoleOutput::ConsoleOutput(ConsoleBoundType boundX, ConsoleBoundType boundY)
     _setmode(_fileno(stdout), _O_U16TEXT);
 }
 
-bool ConsoleOutput::UpdateGlyph(ConsoleBoundType x, ConsoleBoundType y, std::optional<wchar_t> character, std::optional<uint8_t> attributes)
+bool ConsoleOutput::UpdateGlyph(ConsoleBoundType x, ConsoleBoundType y, std::optional<wchar_t> character, std::optional<GlyphAttrib> attributes)
 {
     if(x >= m_boundX || y >= m_boundY)
     {
@@ -40,7 +43,7 @@ bool ConsoleOutput::UpdateGlyph(ConsoleBoundType x, ConsoleBoundType y, std::opt
 
     if(attributes)
     {
-        element.Attributes = *attributes;
+        element.Attributes = attributes->ToAttrib();
     }
 
     return true;
@@ -60,3 +63,5 @@ void ConsoleOutput::SetConsolePos(ConsoleBoundType x, ConsoleBoundType y)
 {
     SetConsoleCursorPosition(m_outputHandle, {x, y});
 }
+
+}   // namespace SCE

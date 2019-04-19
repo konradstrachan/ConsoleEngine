@@ -19,3 +19,8 @@ inline T GetRandomValue( T nMin, T nMax )
 
     return nResult;
 }
+
+inline bool GetRandomBool()
+{
+    return GetRandomValue<uint32_t>( 0, 1 ) == 1;
+}
